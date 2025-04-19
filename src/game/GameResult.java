@@ -1,4 +1,6 @@
-class GameResult {
+package game;
+
+public class GameResult {
     boolean isOver;
     String winner;
 

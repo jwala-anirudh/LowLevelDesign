@@ -1,16 +1,29 @@
-public class Main {
-    public static void main(String[] args) {
+package api;
 
-    }
+import boards.TicTacToeBoard;
+import game.Board;
+import game.Move;
+import game.Player;
+import game.GameResult;
 
+public class GameEngine {
     // To get started with the game
-    public Board start() {
-        return new Board();
+    public Board start(String type) {
+        if (type.equals("TicTacToe")) {
+            return new TicTacToeBoard();
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     // Specifies what move does a player want to perform
     public void move(Board board, Player player, Move move) {
-
+        if (board instanceof TicTacToeBoard) {
+            TicTacToeBoard board1 = (TicTacToeBoard) board;
+            board1.setCell(Move.getCell(), player.symbol());
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     // Says whether a game is complete or incomplete
@@ -24,9 +37,9 @@ public class Main {
             boolean rowComplete = true;
             for (int i = 0; i < 3; i++) {
                 rowComplete = true;
-                firstCharacter = board1.cells[i][0];
+                firstCharacter = board1.getCell(i, 0);
                 for (int j = 0; j < 3; j++) {
-                    if (!board1.cells[i][j].equals(firstCharacter)) {
+                    if (!board1.getCell(i, j).equals(firstCharacter)) {
                         rowComplete = false;
                         break;
                     }
@@ -44,9 +57,9 @@ public class Main {
             boolean columnComplete = true;
             for (int i = 0; i < 3; i++) {
                 columnComplete = true;
-                firstCharacter = board1.cells[0][i];
+                firstCharacter = board1.getCell(0, i);
                 for (int j = 0; j < 3; j++) {
-                    if (!board1.cells[j][i].equals(firstCharacter)) {
+                    if (!board1.getCell(j, i).equals(firstCharacter)) {
                         columnComplete = false;
                         break;
                     }
@@ -61,8 +74,8 @@ public class Main {
             boolean diagonalComplete = true;
             for (int i = 0; i < 3; i++) {
                 diagonalComplete = true;
-                firstCharacter = board1.cells[0][0];
-                if (!board1.cells[i][i].equals(firstCharacter)) {
+                firstCharacter = board1.getCell(0, 0);
+                if (!board1.getCell(i, i).equals(firstCharacter)) {
                     diagonalComplete = false;
                     break;
                 }
@@ -76,8 +89,8 @@ public class Main {
             boolean reverseDiagonalComplete = true;
             for (int i = 0; i < 3; i++) {
                 reverseDiagonalComplete = true;
-                firstCharacter = board1.cells[0][2];
-                if (!board1.cells[i][2 - i].equals(firstCharacter)) {
+                firstCharacter = board1.getCell(0, 2);
+                if (!board1.getCell(i, 2 - i).equals(firstCharacter)) {
                     reverseDiagonalComplete = false;
                     break;
                 }
@@ -91,7 +104,7 @@ public class Main {
             int countOfFilledCells = 0;
             for (int i = 0; i < 3; i++) {
                 for (int j = 1; j < 3; j++) {
-                    if (board1.cells[j][i] != null) {
+                    if (board1.getCell(j, i) != null) {
                         countOfFilledCells += 1;
                     }
                 }
