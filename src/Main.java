@@ -17,15 +17,19 @@ public class Main {
 
         while (!gameEngine.isComplete(board).isOver()) {
             Player computer = new Player("O");
-            Player opponent = new Player("X");
+            Player human = new Player("X");
 
-            System.out.printf("Make your move!");
+            System.out.println("Make your move!");
+
+            System.out.println(board);
 
             row = scanner.nextInt();
             column = scanner.nextInt();
 
             Move oppMove = new Move(new Cell(row, column));
-            gameEngine.move(board, opponent, oppMove);
+            gameEngine.move(board, human, oppMove);
+
+            System.out.println(board);
 
             if (!gameEngine.isComplete(board).isOver()) {
                 Move computerMove = gameEngine.suggestMove(computer, board);
@@ -34,5 +38,6 @@ public class Main {
         }
 
         System.out.println("Game Result : " + gameEngine.isComplete(board));
+        System.out.println(board);
     }
 }

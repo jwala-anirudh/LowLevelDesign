@@ -16,4 +16,12 @@ public class GameResult {
     public String getWinner() {
         return winner;
     }
+
+    @Override
+    public String toString() {
+        return "GameResult{" +
+                "isOver=" + isOver +
+                ", winner='" + winner + '\'' +
+                '}';
+    }
 }
