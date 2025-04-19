@@ -42,3 +42,13 @@ Under the umbrella of low level design, we will be looking at:
 
 - Guiding principles
 - Design patterns
+
+---
+
+## Requirement
+
+Taking a game and having the ability to play it through AI.
+
+### Engineering questions?
+- What kind of APIs should you be exposing?
+- 
