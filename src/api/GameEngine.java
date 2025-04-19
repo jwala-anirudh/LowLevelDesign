@@ -5,6 +5,7 @@ import game.Board;
 import game.Move;
 import game.Player;
 import game.GameResult;
+import game.Cell;
 
 public class GameEngine {
     // To get started with the game
@@ -104,7 +105,7 @@ public class GameEngine {
             int countOfFilledCells = 0;
             for (int i = 0; i < 3; i++) {
                 for (int j = 1; j < 3; j++) {
-                    if (board1.getCell(j, i) != null) {
+                    if (board1.getCell(i, j) != null) {
                         countOfFilledCells += 1;
                     }
                 }
@@ -117,6 +118,23 @@ public class GameEngine {
             }
         } else {
             return new GameResult(false, "-");
+        }
+    }
+
+    public Move suggestMove(Player computer, Board board) {
+        if (board instanceof TicTacToeBoard) {
+            TicTacToeBoard board1 = (TicTacToeBoard) board;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (board1.getCell(j, i) == null) {
+                        return new Move(new Cell(i, j));
+                    }
+                }
+            }
+
+            throw new IllegalArgumentException();
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 }
